@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Car Entry</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Add your custom styles here */
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            width: 100%;
+        }
+        label {
+            font-weight: bold;
+        }
+        .add-more-link {
+            margin-top: 10px;
+            display: block;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Add Car Entry</h1>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ car_form.as_p }}
+                    <hr>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Car Images</h2>
+                        </div>
+                        <div class="card-body">
+                            {{ image_formset.management_form }}
+                            {% for form in image_formset %}
+                                <div class="form-group">
+                                    <label for="{{ form.image.id_for_label }}">Image</label>
+                                    {{ form.image }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card" id="car-documents">
+                        <div class="card-header">
+                            <h2 class="card-title">Car Documents</h2>
+                        </div>
+                        <div class="card-body">
+                            {{ document_formset.management_form }}
+                            {% for form in document_formset %}
+                                <div class="document-field {% if not forloop.first %}hidden{% endif %}">
+                                    <div class="form-group">
+                                        <label for="{{ form.name.id_for_label }}">Name</label>
+                                        {{ form.name }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="{{ form.document.id_for_label }}">Document</label>
+                                        {{ form.document }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <a href="#" class="add-more-link" id="add-document">Add more documents</a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card" id="car-expenses">
+                        <div class="card-header">
+                            <h2 class="card-title">Car Expenses</h2>
+                        </div>
+                        <div class="card-body">
+                            {{ expense_formset.management_form }}
+                            {% for form in expense_formset %}
+                                <div class="expense-field {% if not forloop.first %}hidden{% endif %}">
+                                    <div class="form-group">
+                                        <label for="{{ form.name.id_for_label }}">Name</label>
+                                        {{ form.name }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="{{ form.price.id_for_label }}">Price</label>
+                                        {{ form.price }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <a href="#" class="add-more-link" id="add-expense">Add more expenses</a>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#add-document").click(function(e) {
+                e.preventDefault();
+                $(".document-field.hidden:first").removeClass("hidden");
+            });
+
+            $("#add-expense").click(function(e) {
+                e.preventDefault();
+                $(".expense-field.hidden:first").removeClass("hidden");
+            });
+        });
+    </script>
+</body>
+</html>

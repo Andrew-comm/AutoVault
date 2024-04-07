@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Detail</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS */
+        .car-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .details-card {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .gallery-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .documents-list, .expenses-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .documents-list li, .expenses-list li {
+            margin-bottom: 10px;
+        }
+        .documents-list li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .card {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            color: #007bff;
+            text-align: center;
+        }
+        .card-body {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Car Detail</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Main car image -->
+                                <img src="{{ car.car_image.url }}" alt="Car Image" class="img-fluid car-image">
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Car details in a small card -->
+                                <div class="card details-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Car Details</h5>
+                                        <p class="card-text"><strong>Make:</strong> {{ car.make }}</p>
+                                        <p class="card-text"><strong>Model:</strong> {{ car.model }}</p>
+                                        <p class="card-text"><strong>Buying Price:</strong> ${{ car.buying_price|floatformat:"2" }}</p>
+                                        <p class="card-text"><strong>Selling Price:</strong> ${{ car.selling_price|floatformat:"2" }}</p>
+                                        <p class="card-text"><strong>Discount:</strong> ${{ car.discount|floatformat:"2" }}</p>
+                                        <p class="card-text"><strong>Price:</strong> ${{ total_price|floatformat:"2" }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Car Gallery -->
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-md-12">
+                                <div class="card gallery-card">
+                                    <div class="card-header">
+                                        <h3>Car Gallery</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            {% for image in car.gallery_images.all %}
+                                                <div class="col-md-3 mb-3">
+                                                    <div class="card">
+                                                        <img src="{{ image.image.url }}" class="card-img-top" alt="Gallery Image">
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Car Documents -->
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-md-12">
+                                <div class="card documents-card">
+                                    <div class="card-header">
+                                        <h3>Car Documents</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="documents-list">
+                                            {% for document in car.cardocument_set.all %}
+                                                <li>{{ document.name }}: <a href="{{ document.document.url }}">{{ document.document.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Car Expenses -->
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-md-12">
+                                <div class="card expenses-card">
+                                    <div class="card-header">
+                                        <h3>Car Expenses</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="expenses-list">
+                                            {% for expense in car.expenses.all %}
+                                                <li>{{ expense.name }}: ${{ expense.price|floatformat:"2" }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

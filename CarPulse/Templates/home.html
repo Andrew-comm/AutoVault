@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>AutoVault</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="{% static 'images/default.png' %}" alt="Car Inventory System Logo" height="50" width="70px">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#featured-cars">Featured Cars</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#signup">Signup</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container welcome-container">
+        <div class="welcome-text">
+            <h1>AutoVault Car Inventory System</h1>
+            <p>Manage your car inventory efficiently with our easy-to-use system</p>
+            <a href="#inventory" class="btn btn-primary">Explore Inventory</a>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'images/store.jpg' %}" alt="Car Image" class="img-fluid" >
+        </div>
+    </div>
+
+    <section id="featured-cars">
+        <div class="container">
+            <h2 class="text-dark text-center">Featured Cars</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-4 d-flex">
+                    <div class="car">
+                        <img src="{% static 'images/mustag.jpeg' %}" alt="Car 1">
+                        <h3>Ford Mustang GT</h3>
+                        <p>Powerful performance and classic design. With a 5.0L V8 engine producing over 450 horsepower.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <div class="car">
+                        <img src="{% static 'images/BMW.png' %}" alt="Car 2">
+                        <h3>BMW 3 Series</h3>
+                        <p>The BMW 3 Series is a luxury compact sedan that blends performance, comfort, and style seamlessly.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <div class="car">
+                        <img src="{% static 'images/Toyota.jpg' %}" alt="Car 3">
+                        <h3>Toyota Prius</h3>
+                        <p>The Toyota Prius is a hybrid compact car renowned for its exceptional fuel efficiency and eco-friendly design.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <div class="car">
+                        <img src="{% static 'images/chervolet.jpeg' %}" alt="Car 4">
+                        <h3>Chevrolet Silverado 1500</h3>
+                        <p>The Chevrolet Silverado 1500 is a versatile full-size pickup truck built to tackle tough tasks with ease. </p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <div class="car">
+                        <img src="{% static 'images/Tesla.jpg' %}" alt="Car 5">
+                        <h3>Tesla Model S</h3>
+                        <p>The Tesla Model S is an all-electric luxury sedan that redefines the driving experience with its groundbreaking technology and performance.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <div class="car">
+                        <img src="{% static 'images/Honda.jpeg' %}" alt="Car 6">
+                        <h3>Honda Civic</h3>
+                        <p>The Honda Civic is a compact car known for its reliability, efficiency, and practicality.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h2 class="section-title">About Us</h2>
+                        <p class="section-description">Welcome to AutoVault, your ultimate destination for car enthusiasts! We are passionate about providing a seamless and enjoyable experience for car buyers and sellers alike.</p>
+                        <p class="section-description">With our comprehensive inventory management system, we strive to make the process of buying and selling cars easier, faster, and more transparent.</p>
+                        <a href="#inventory" class="btn btn-primary btn-lg">Explore Inventory</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="{% static 'images/cover.png' %}" alt="About Image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-content">
+                        <h2 class="section-title">Contact Us</h2>
+                        <p class="section-description">Have questions or feedback? We'd love to hear from you!</p>
+                        <form id="contact-form" action="#" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-image">
+                        <img src="{% static 'images/earth.png' %}" alt="Contact Image" class="img-fluid earth-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

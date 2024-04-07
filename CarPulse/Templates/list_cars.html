@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Cars</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS */
+        .car-item {
+            margin-bottom: 20px;
+        }
+        .card {
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+        .car-image {
+            max-width: 100%;
+            height: auto;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .car-details {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .car-title {
+            margin-bottom: 0.5rem;
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .car-price {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .btn {
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Vehicles Inventory</h1>
+        <div class="row">
+            {% for car in cars %}
+                <div class="col-md-4 mb-4"> <!-- Added mb-4 class for spacing -->
+                    <div class="card car-item">
+                        <img src="{{ car.car_image.url }}" alt="Car Image" class="card-img-top car-image">
+                        <div class="card-body car-details">
+                            <h4 class="card-title car-title"><strong>{{ car.make }}</strong> - {{ car.model }}</h4>
+                            <p class="card-text"><strong>Buying Price:</strong> <span class="car-price">{{ car.buying_price }}</span></p>
+                            <p class="card-text"><strong>Selling Price:</strong> <span class="car-price">{{ car.selling_price }}</span></p>
+                            <p class="card-text"><strong>Discount:</strong> <span class="car-price">{{ car.discount }}</span></p>
+                            <a href="{% url 'car-detail' car.id %}" class="btn btn-primary">Vehicle Details</a>
+                            <a href="{% url 'update-car' car.id %}" class="btn btn-primary">Update Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
