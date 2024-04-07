@@ -1,10 +1,42 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from . models import Car
 from . forms import CarDocumentFormSet, CarExpenseFormSet, CarForm, CarImageFormSet
+from django.contrib.auth import authenticate, login, logout
+from .forms import UserRegistrationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('car-list')  
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'register.html', {'form': form})
+
+def login_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+    
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect(request.GET.get('next', 'car-list'))  # Redirect to 'products' or your desired URL
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 def add_car(request):
     if request.method == 'POST':
@@ -46,6 +78,8 @@ def car_detail(request, car_id):
         'total_price': total_price
     }
     return render(request, 'car_detail.html', context)
+
+
 def update_car(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
     if request.method == 'POST':
@@ -56,6 +90,8 @@ def update_car(request, car_id):
     else:
         car_form = CarForm(instance=car)
     return render(request, 'update_car.html', {'car_form': car_form, 'car': car})  # Pass the car instance to the template context
+
+
 def delete_car(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
     if request.method == 'POST':
