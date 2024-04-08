@@ -13,29 +13,12 @@
             padding: 20px;
             background-color: #f8f9fa;
         }
-        h1, h2 {
-            margin-bottom: 20px;
-        }
         .card {
             margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease-in-out;
-        }
-        .card:hover {
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
         }
         .card-header {
             background-color: #007bff;
             color: white;
-        }
-        .card-body {
-            padding: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-control {
-            width: 100%;
         }
         label {
             font-weight: bold;
@@ -44,9 +27,6 @@
             margin-top: 10px;
             display: block;
             cursor: pointer;
-        }
-        .hidden {
-            display: none;
         }
     </style>
 </head>
@@ -69,7 +49,7 @@
                             {{ image_formset.management_form }}
                             {% for form in image_formset %}
                                 <div class="form-group">
-                                    <label for="{{ form.image.id_for_label }}">Image</label>
+                                    <label>Image</label>
                                     {{ form.image }}
                                 </div>
                             {% endfor %}
@@ -83,13 +63,13 @@
                         <div class="card-body">
                             {{ document_formset.management_form }}
                             {% for form in document_formset %}
-                                <div class="document-field {% if not forloop.first %}hidden{% endif %}">
+                                <div class="document-field {% if not forloop.first %}d-none{% endif %}">
                                     <div class="form-group">
-                                        <label for="{{ form.name.id_for_label }}">Name</label>
+                                        <label>Name</label>
                                         {{ form.name }}
                                     </div>
                                     <div class="form-group">
-                                        <label for="{{ form.document.id_for_label }}">Document</label>
+                                        <label>Document</label>
                                         {{ form.document }}
                                     </div>
                                 </div>
@@ -105,13 +85,13 @@
                         <div class="card-body">
                             {{ expense_formset.management_form }}
                             {% for form in expense_formset %}
-                                <div class="expense-field {% if not forloop.first %}hidden{% endif %}">
+                                <div class="expense-field {% if not forloop.first %}d-none{% endif %}">
                                     <div class="form-group">
-                                        <label for="{{ form.name.id_for_label }}">Name</label>
+                                        <label>Name</label>
                                         {{ form.name }}
                                     </div>
                                     <div class="form-group">
-                                        <label for="{{ form.price.id_for_label }}">Price</label>
+                                        <label>Price</label>
                                         {{ form.price }}
                                     </div>
                                 </div>
@@ -133,12 +113,12 @@
         $(document).ready(function() {
             $("#add-document").click(function(e) {
                 e.preventDefault();
-                $(".document-field.hidden:first").removeClass("hidden");
+                $(".document-field.d-none:first").removeClass("d-none");
             });
 
             $("#add-expense").click(function(e) {
                 e.preventDefault();
-                $(".expense-field.hidden:first").removeClass("hidden");
+                $(".expense-field.d-none:first").removeClass("d-none");
             });
         });
     </script>

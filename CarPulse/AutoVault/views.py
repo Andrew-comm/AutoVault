@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from . models import Car
 from . forms import CarDocumentFormSet, CarExpenseFormSet, CarForm, CarImageFormSet
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, login_required
 from .forms import UserRegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -37,7 +37,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
-
+@login_required
 def add_car(request):
     if request.method == 'POST':
         car_form = CarForm(request.POST, request.FILES)
@@ -61,12 +61,12 @@ def add_car(request):
     return render(request, 'add_car.html', {'car_form': car_form, 'image_formset': image_formset, 'document_formset': document_formset, 'expense_formset': expense_formset})
 
 
-
+@login_required
 def list_cars(request):
     cars = Car.objects.all()
     return render(request, 'list_cars.html', {'cars': cars})
 
-
+@login_required
 def car_detail(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
     total_expenses = sum(expense.price for expense in car.expenses.all())
@@ -79,7 +79,7 @@ def car_detail(request, car_id):
     }
     return render(request, 'car_detail.html', context)
 
-
+@login_required
 def update_car(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
     if request.method == 'POST':
@@ -91,7 +91,7 @@ def update_car(request, car_id):
         car_form = CarForm(instance=car)
     return render(request, 'update_car.html', {'car_form': car_form, 'car': car})  # Pass the car instance to the template context
 
-
+@login_required
 def delete_car(request, car_id):
     car = get_object_or_404(Car, pk=car_id)
     if request.method == 'POST':

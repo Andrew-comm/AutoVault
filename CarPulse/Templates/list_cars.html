@@ -1,64 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List Cars</title>
+    <link rel="stylesheet" href="{% static 'css/car-list.css' %}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Custom CSS */
-        .car-item {
-            margin-bottom: 20px;
-        }
-        .card {
-            height: 100%;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            font-family: Arial, sans-serif;
-        }
-        .car-image {
-            max-width: 100%;
-            height: auto;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-        .car-details {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .car-title {
-            margin-bottom: 0.5rem;
-            color: #007bff;
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-        .car-price {
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        .btn {
-            font-family: 'Arial Rounded MT Bold', sans-serif;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            width: 100%;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-    </style>
+    
 </head>
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/default.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+            Car Inventory System
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <!-- Add new car link -->
+                <li class="nav-item">
+                    <a href="{% url 'add-car' %}" class="btn btn-primary">Add New Car</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <!-- Logout button -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Vehicles Inventory</h1>
         <div class="row">
@@ -73,6 +49,8 @@
                             <p class="card-text"><strong>Discount:</strong> <span class="car-price">{{ car.discount }}</span></p>
                             <a href="{% url 'car-detail' car.id %}" class="btn btn-primary">Vehicle Details</a>
                             <a href="{% url 'update-car' car.id %}" class="btn btn-primary">Update Details</a>
+                            <a href="{% url 'delete-car' car.id %}" class="btn btn-danger">Delete</a>
+
                         </div>
                     </div>
                 </div>
