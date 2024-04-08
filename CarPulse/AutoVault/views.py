@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from . models import Car
 from . forms import CarDocumentFormSet, CarExpenseFormSet, CarForm, CarImageFormSet
-from django.contrib.auth import authenticate, login, logout, login_required
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
 
